@@ -9,9 +9,10 @@ def index():
     '''
     title = "Get Started with a pitch"
     '''
+    title = "Get started with a pitch"
     return render_template('index.html' title= title)
 
-    
+
     
     
 
