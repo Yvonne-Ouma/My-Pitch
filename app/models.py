@@ -41,6 +41,21 @@ class Category(db.Model):
     name = db.Column(db.String(255))
     description = db.Column(db.String(255))
     users = db.relationship('User',backref = 'category',lazy="dynamic") 
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
 
     def __repr__(self):
-        return f'User {self.name}'       
+        return f'User {self.name}'  
+
+
+class Pitch(db.Model):
+    __tablename__ = 'pitch'
+
+    id = db.Column(db.Integer, primary_key = True)
+    author = db.Column(db.String(255))
+    title = db.Column(db.String(255))
+    date_of_pitch = db.Column(db.String(255))
+    pitch_image = db.Column(db.String(255))
+    content = db.Column(db.String(255))
+    category = db.Column(db.String(255))
+    category = db.relationship('Category',backref = 'pitch',lazy="dynamic")
+
