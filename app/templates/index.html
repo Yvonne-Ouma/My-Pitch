@@ -1,16 +1,36 @@
 {% extends 'bootstrap/base.html'%}
 
-<!-- Navbar block  --> 
 {% block navbar %}
     {% include 'navbar.html' %}
 {% endblock %}
-
+{% block content%}
 <!DOCTYPE html>
 <html>
     <head>
         <title>{{ title }}</title>
     </head>
     <body>
-        <h2>Welcome People</h2>
+        {% for pitch in pitches %}
+        <div style="background-color:black;" class="panel panel-default">
+            <article class="media content-section">
+                <div class="panel-header">
+                    <div class="article-metadata">
+                        <img style="border-radius: 50%;" src="{{ pitch.image }}" class="img-thumbnail img-circle" width="70px">
+                        <a class="mr-2" href="#">{{ pitch.author }}</a>
+                        
+                    </div>
+                    <div class="panel-body">
+                    <small> {{ pitch.pitchedOn }}</small>
+                    <h4>{{ pitch.title }}</h4>
+                    <small>Category: {{ pitch.category }} </small>
+                    <p> {{ pitch.content }}</p>
+                    
+                    </div>
+                    
+                </div>
+            </article>
+        </div>   
+         {% endfor %}
     </body>
 </html>
+{% endblock content%}
