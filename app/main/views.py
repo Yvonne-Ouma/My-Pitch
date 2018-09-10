@@ -1,6 +1,8 @@
+from flask import Flask
+from . import main
 from flask import render_template
 from flask_login import login_required
-from . import main
+
 
 app = Flask(__name__)
 
@@ -9,8 +11,8 @@ def index():
     '''
     title = "Get Started with a pitch"
     '''
-    title = "Get started with a pitch"
-    return render_template('index.html' title= title)
+    title = 'Get started with a pitch'
+    return render_template('index.html', title= title)
 
 
     
