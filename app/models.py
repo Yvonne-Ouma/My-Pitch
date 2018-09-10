@@ -45,7 +45,7 @@ class Category(db.Model):
     pitches = db.relationship('Pitch',backref = 'category',lazy="dynamic") 
 
     def __repr__(self):
-        return f'Category {self.name}'  
+        return f'{self.name}'  
 
 
 class Pitch(db.Model):
