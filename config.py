@@ -11,6 +11,8 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    SUBJECT_PREFIX = 'My-Pitch'
+    SENDER_EMAIL = 'yvonneouma98@gmail.com'
     
 
 class ProdConfig(Config):
