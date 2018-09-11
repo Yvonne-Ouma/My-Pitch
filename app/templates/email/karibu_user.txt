@@ -1,0 +1,3 @@
+Hello {{ user.username}}
+Welcome to My Pitch application
+We first of all like to thank you for signing up to our application.We hope that you are going to have a greate time with us.fill free to comment on different pitches and to even add a pitch of your own.
