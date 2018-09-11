@@ -54,7 +54,6 @@ class Pitch(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(255))
     date_of_pitch = db.Column(db.String(255))
-    pitch_image = db.Column(db.String(255))
     content = db.Column(db.String(255))
     category_id = db.Column(db.Integer,db.ForeignKey('category.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))

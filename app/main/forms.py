@@ -1,0 +1,2 @@
+class pitchForm(FlaskForm):
+    pitch

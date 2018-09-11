@@ -1,34 +1,28 @@
-{% extends 'bootstrap/base.html'%}
+{% extends 'base.html'%}
 
-{% block navbar %}
-    {% include 'navbar.html' %}
-{% endblock %}
+
 {% block content%}
 <!DOCTYPE html>
 <html>
     <head>
         <title>{{ title }}</title>
     </head>
-    <body style="background-image:url('http://akami.us/wp-content/uploads/2018/05/black-wallpaper-dp-dark-blue-hd-wallpapers-wallpaper-of-black-wallpaper-dp.jpg'); color:white; padding-left:400px;">
+    <body style="background-image:url('http://akami.us/wp-content/uploads/2018/05/black-wallpaper-dp-dark-blue-hd-wallpapers-wallpaper-of-black-wallpaper-dp.jpg');">
         {% for pitch in pitches %}
-        <div class="panel panel-default">
-            <article class="media content-section">
-                <div class="panel-header">
-                    <div class="article-metadata">
-                        <img style="border-radius: 50%;" src="{{ pitch.pitch_image }}" class="img-thumbnail img-circle" width="70px">
-                        
-                    </div>
-                    <div class="panel-body">
-                    <small> {{ pitch.date_of_pitch }}</small>
-                    <h4>{{ pitch.title }}</h4>
-                    <small>Category: {{ pitch.category }} </small>
-                    <p> {{ pitch.content }}</p>
-                    
-                    </div>
-                    
-                </div>
-            </article>
-        </div>   
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>Category: {{ pitch.category }}</h4></div>
+                        <div class="panel-body">
+                            <p> {{ pitch.title }}</p>
+                            <p>{{ pitch.content }} </p>
+                            </div>
+                        </div>
+            </div>
+
+        </div>
+        
+    
          {% endfor %}
     </body>
 </html>
