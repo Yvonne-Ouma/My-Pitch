@@ -1,2 +1,0 @@
-class pitchForm(FlaskForm):
-    pitch
