@@ -2,9 +2,9 @@ from flask import Flask
 from . import main
 from flask import render_template,redirect,url_for,abort,flash
 from flask_login import login_required
-from ..models import User,Pitch,Category
-from .forms import ReviewForm,UpdateProfile
-from .. import db
+from ..models import User,Pitch,Category,Comment
+from .forms import MinutePitchForm,UpdateProfile,CommentForm
+from .. import db, photos
 
 
 app = Flask(__name__)
@@ -28,7 +28,7 @@ def profile(uname):
     if user is None:
         abort(404)
 
-        return render_template("profile/profile.html", user = user)
+    return render_template("profile/profile.html", user = user)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -67,7 +67,7 @@ def update_pic(uname):
 @main.route('/pitch/new', methods=['GET', 'POST'])  
 @login_required
 def new_pitch():
-    form= ReviewForm()
+    form= MinutePitchForm()
 
     if form.validate_on_submit():
         title = form.title.data 
@@ -95,6 +95,39 @@ def new_pitch():
 def one_pitch(id):
     pitch = Pitch.query.get(id)
     return render_template('onePitch.html', pitch = pitch)
+
+# @main.route('/allpitches')
+# def pitch_list():
+
+#     pitches = Pitch.query.all()
+
+#     return render_template('pitches.html', pitches=pitches)
+
+@main.route('/pitch/<int:pitch_id>/',methods = ["GET","POST"])
+def pitch(pitch_id):
+    pitch = Pitch.query.get(pitch_id)
+    form = CommentForm()
+
+    if form.validate_on_submit():
+        title = form.title.data 
+        comment = form.comment.data 
+        new_pitch_comment = Comment(title = title,
+                                    comment=comment,
+                                    pitch_id = pitch_id,
+
+
+                                    user = current_user)
+
+        db.session.add(new_pitch_comment) 
+        db.session.commit()
+
+    comments = Comment.query.all()
+    return render_template('comment_pitch.html', title = pitch.title,
+                            pitch =pitch, 
+                            pitch_form = form, 
+                            comments = comments)                                
+
+
 
 
         

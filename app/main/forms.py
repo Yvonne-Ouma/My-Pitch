@@ -2,9 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,TextAreaField,SubmitField
 from wtforms.validators import Required
 
-class ReviewForm(FlaskForm):
+class MinutePitchForm(FlaskForm):
 
-    title = StringField('Review title',validators=[Required()])
+    title = StringField('MinutePitch title',validators=[Required()])
     review = TextAreaField('pitch review', validators=[Required()])
     submit = SubmitField('Submit')
 
