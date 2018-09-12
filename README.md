@@ -7,6 +7,7 @@ My application by the name my pitch is a great platform for you to post a pitch 
 ### Prerequisites
 * web browser 
 * git
+* Virtual environment
 
 ### Setup Instruction
 To start using this project use the following commands:
