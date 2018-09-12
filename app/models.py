@@ -18,6 +18,11 @@ class User(UserMixin,db.Model):
     pass_secure = db.Column(db.String(255))
 
     pitches = db.relationship('Pitch',backref = 'author',lazy="dynamic") 
+    comments = db.relationship('Comment', backref = 'author', lazy = "dynamic")
+    
+    def save_user(self, user):
+        db.session.add(user)
+        db.session.commit()
 
     @property
     def password(self):
@@ -44,6 +49,11 @@ class Category(db.Model):
 
     pitches = db.relationship('Pitch',backref = 'category',lazy="dynamic") 
 
+
+    def save_category(self, category):
+        db.session.add(category)
+        db.session.commit()
+
     def __repr__(self):
         return f'{self.name}'  
 
@@ -57,7 +67,26 @@ class Pitch(db.Model):
     content = db.Column(db.String(255))
     category_id = db.Column(db.Integer,db.ForeignKey('category.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    comments = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
+    
+
+    def save_pitch(self, pitch):
+        db.session.add(pitch)
+        db.session.commit()
 
     def __repr__(self):
         return f'Pitch {self.title}'
+
+class Comment(db.Model):
+    __tablename__= 'comments'
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    comment = db.Column(db.String(255))
+
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
+
+    
+           
 

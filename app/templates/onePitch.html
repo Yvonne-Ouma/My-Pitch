@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron">
+  <div class="container">
+  <br>
+    <br>
+
+    <br>
+
+    <br>
+
+  <button type="button" class="btn btn-outline-primary"><a href="/pitch/new">New Pitch</a></button>
+    <br>
+    <br>
+
+
+   <div class="card border-secondary mb-3" style="max-width: 18rem;">
+   <div class="card-header"><h5>{{ pitch.title }}</h5>
+
+  </div>
+
+   <div class="card-body text-secondary">
+
+    <p class="card-text">{{pitch.content}}</p>
+
+   <br>
+
+  </div>
+
+            <!--<footer class="blockquote-footer"> <cite title="Source Title">Category: {{pitch.category_id}} </cite></footer>-->
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}

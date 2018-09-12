@@ -19,9 +19,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
+                    
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/pitch/new">Pitch An Idea</a></li>
                   {% if current_user.is_authenticated %}
                   <li><a href="{{url_for('main.profile',uname=current_user.username)}}">View Profile</a></li>
                   <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
