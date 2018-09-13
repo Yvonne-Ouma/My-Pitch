@@ -71,20 +71,17 @@ def new_pitch():
 
     if form.validate_on_submit():
         title = form.title.data 
-        date_of_pitch = form.date_of_pitch.data 
-        content = form.content.data  
+        content = form.content.data 
+        category = form.category.data 
 
-        pitch = Pitch(title = title,
-                      date_of_pitch = date_of_pitch,
-                      content = content,
-                      user = current_user)
+        pitch = Pitch(title = title,content = content, category = category)
 
         db.session.add(pitch)
-        db.seesion.commit()
+        db.session.commit()
 
         print('yvonne')
         flash('Creating pitch has been successful!')
-        return redirect(url_for(main.one_pitch, id = pitch.id))
+        return redirect(url_for('main.one_pitch', id = pitch.id))
 
 
     return render_template('newP.html', title='New Pitch',pitch_form = form, legend = 'New Pitch')
@@ -94,12 +91,7 @@ def one_pitch(id):
     pitch = Pitch.query.get(id)
     return render_template('onePitch.html', pitch = pitch)
 
-# @main.route('/allpitches')
-# def pitch_list():
 
-#     pitches = Pitch.query.all()
-
-#     return render_template('pitches.html', pitches=pitches)
 
 @main.route('/pitch/<int:pitch_id>/',methods = ["GET","POST"])
 def pitch(pitch_id):
@@ -111,38 +103,13 @@ def pitch(pitch_id):
         comment = form.comment.data 
         new_pitch_comment = Comment(title = title,
                                     comment=comment,
-                                    pitch_id = pitch_id,
-
-
-                                    user = current_user)
+                                    pitch_id = pitch_id)
 
         db.session.add(new_pitch_comment) 
         db.session.commit()
 
     comments = Comment.query.all()
     return render_template('comment_pitch.html', title = pitch.title, pitch =pitch, pitch_form = form, comments = comments) 
-
-
-@main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
-@login_required
-def new_comment(id):
-    
-    form = CommentForm()
-    pitch = Pitch.query.filter_by(id = id).first()
-
-    if form.validate_on_submit():
-        title = form.title.data
-        comment = form.comment.data
-
-        # comment
-        new_comment = Comment(pitch_id = pitch.id, comment = comment, title = title, user = current_user)
-
-        new_comment.save_comment()
-
-        return redirect(url_for('.pitches',id = pitch.id))
-
-    title = f'{pitch.title} comment'
-    return render_template('new_comment.html', title = title, comment_form = form, pitch = pitch) 
 
 
 

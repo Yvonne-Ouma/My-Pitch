@@ -8,7 +8,9 @@
         <title>{{ title }}</title>
     </head>
     <body>
-      <div class = "container"> 
+      <div class = "container" style = "padding-top:70px;"> 
+
+        <h4>Do you want to add a pitch:<p><a href="/pitch/new">Add a pitch</a></p> </h4>
     <div class="row">
             
         {% for pitch in pitches %}
@@ -18,6 +20,8 @@
                         <div class ="panel-body">
                             <p> {{ pitch.title }}</p>
                             <p>{{ pitch.content }} </p>
+                            <p>{{ pitch.date_of_pitch }}</p>
+                            <div class="panel-footer">Add a comment <a href="/pitch/{{pitch.id}}">Here</a></div>
                             </div>
                         </div>
                     </div>

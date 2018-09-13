@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-    <div class="navbar navbar-inverse" role="navigation">
+    <div class="navbar navbar-inverse" role="navigation" style="overflow: hidden; background-color: black; position: fixed; z-index: 1; top: 0; width: 100%;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,7 +23,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="/pitch/new">Pitch An Idea</a></li>
+                  
                   {% if current_user.is_authenticated %}
                   <li><a href="{{url_for('main.profile',uname=current_user.username)}}">View Profile</a></li>
                   <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>

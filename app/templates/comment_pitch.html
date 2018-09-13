@@ -1,12 +1,13 @@
-{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block content %}
+{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} 
+{% block content %}
 
-<div class="jumbotron" style="text-align:center";>
+<div class="container" style="text-align:center";>
 <h1>Pitches</h1>
 <article class="media content-section">
   <div class="media-body">
     <div class="article-metadata">
-      <a class="mr-2" href="#">{{ pitch.user_id.username }}</a>
-      
+      <a class="mr-2" href="#">{{ pitch.username }}</a>
+
     </div>
     <h2 class="article-title">{{ pitch.title }}</h2>
     <p class="article-content">{{ pitch.content }}</p>
@@ -24,7 +25,7 @@
   <article class="">
   <div class="media-body">
     <div class="article-metadata">
-      <a class="mr-2" href="#">{{ comment.user.username }}</a>
+      <a class="mr-2" href="#">{{ comment.username }}</a>
       <small class="text-muted">{{ comment.pitches }}</small>
     </div>
     <p class="article-content">{{ comment.comment }}</p>
