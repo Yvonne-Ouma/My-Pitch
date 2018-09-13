@@ -2,6 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime 
 
 
 @login_manager.user_loader
@@ -40,22 +41,22 @@ class User(UserMixin,db.Model):
         return f'User {self.username} {self.bio} {self.email}'
 
 
-class Category(db.Model):
-    __tablename__ = 'category'
+# class Category(db.Model):
+#     __tablename__ = 'category'
 
-    id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-    description = db.Column(db.String(255))
+#     id = db.Column(db.Integer,primary_key = True)
+#     name = db.Column(db.String(255))
+#     description = db.Column(db.String(255))
 
-    pitches = db.relationship('Pitch',backref = 'category',lazy="dynamic") 
+#     pitches = db.relationship('Pitch',backref = 'category',lazy="dynamic") 
 
 
-    def save_category(self, category):
-        db.session.add(category)
-        db.session.commit()
+#     def save_category(self, category):
+#         db.session.add(category)
+#         db.session.commit()
 
-    def __repr__(self):
-        return f'{self.name}'  
+#     def __repr__(self):
+#         return f'{self.name}'  
 
 
 class Pitch(db.Model):
@@ -63,9 +64,10 @@ class Pitch(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(255))
-    date_of_pitch = db.Column(db.String(255))
+    date_of_pitch = db.Column(db.DateTime,default=datetime.utcnow)
     content = db.Column(db.String(255))
-    category_id = db.Column(db.Integer,db.ForeignKey('category.id'))
+    category = db.Column(db.String(255))
+    # category_id = db.Column(db.Integer,db.ForeignKey('category.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     comments = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
     

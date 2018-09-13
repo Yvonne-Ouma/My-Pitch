@@ -2,7 +2,7 @@ from flask import Flask
 from . import main
 from flask import render_template,redirect, request, url_for,abort,flash
 from flask_login import login_required, current_user
-from ..models import User,Pitch,Category,Comment
+from ..models import User,Pitch,Comment
 from .forms import MinutePitchForm,UpdateProfile,CommentForm
 from .. import db, photos
 
@@ -72,13 +72,11 @@ def new_pitch():
     if form.validate_on_submit():
         title = form.title.data 
         date_of_pitch = form.date_of_pitch.data 
-        content = form.content.data 
-        category_id = form.category_id.data 
+        content = form.content.data  
 
         pitch = Pitch(title = title,
                       date_of_pitch = date_of_pitch,
                       content = content,
-                      category_id = category_id,
                       user = current_user)
 
         db.session.add(pitch)
@@ -122,7 +120,31 @@ def pitch(pitch_id):
         db.session.commit()
 
     comments = Comment.query.all()
-    return render_template('comment_pitch.html', title = pitch.title, pitch =pitch, pitch_form = form, comments = comments)                                
+    return render_template('comment_pitch.html', title = pitch.title, pitch =pitch, pitch_form = form, comments = comments) 
+
+
+@main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_comment(id):
+    
+    form = CommentForm()
+    pitch = Pitch.query.filter_by(id = id).first()
+
+    if form.validate_on_submit():
+        title = form.title.data
+        comment = form.comment.data
+
+        # comment
+        new_comment = Comment(pitch_id = pitch.id, comment = comment, title = title, user = current_user)
+
+        new_comment.save_comment()
+
+        return redirect(url_for('.pitches',id = pitch.id))
+
+    title = f'{pitch.title} comment'
+    return render_template('new_comment.html', title = title, comment_form = form, pitch = pitch) 
+
+
 
 
 
