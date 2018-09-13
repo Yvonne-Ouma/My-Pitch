@@ -1,7 +1,7 @@
 from flask import Flask
 from . import main
-from flask import render_template,redirect,url_for,abort,flash
-from flask_login import login_required
+from flask import render_template,redirect, request, url_for,abort,flash
+from flask_login import login_required, current_user
 from ..models import User,Pitch,Category,Comment
 from .forms import MinutePitchForm,UpdateProfile,CommentForm
 from .. import db, photos
@@ -122,10 +122,7 @@ def pitch(pitch_id):
         db.session.commit()
 
     comments = Comment.query.all()
-    return render_template('comment_pitch.html', title = pitch.title,
-                            pitch =pitch, 
-                            pitch_form = form, 
-                            comments = comments)                                
+    return render_template('comment_pitch.html', title = pitch.title, pitch =pitch, pitch_form = form, comments = comments)                                
 
 
 

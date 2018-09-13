@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block content %}
+
+<div class="jumbotron" style="text-align:center";>
+<h1>Pitches</h1>
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ pitch.user_id.username }}</a>
+      
+    </div>
+    <h2 class="article-title">{{ pitch.title }}</h2>
+    <p class="article-content">{{ pitch.content }}</p>
+  </div>
+
+
+</article>
+
+
+{{wtf.quick_form(pitch_form)}}
+
+  {% for comment in comments[::-1] %}
+
+
+  <article class="">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ comment.user.username }}</a>
+      <small class="text-muted">{{ comment.pitches }}</small>
+    </div>
+    <p class="article-content">{{ comment.comment }}</p>
+  </div>
+
+</article>
+{% endfor %}
+
+</div>
+{% endblock content %}
