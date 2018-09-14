@@ -14,9 +14,9 @@ class Config:
     SUBJECT_PREFIX = 'yvonneoumapitch'
     SENDER_EMAIL = 'yvonneouma98@gmail.com'
     
-    @staticmethod
-    def init_app(app):
-        pass
+    # @staticmethod
+    # def init_app(app):
+    #     pass
 
 class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
@@ -24,12 +24,12 @@ class ProdConfig(Config):
 # class TestConfig(Config):
 #     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yyvonne:ojijo@localhost/yvonneoumapitch_test'
 
-# class DevConfig(Config):
-#     DEBUG = True
+class DevConfig(Config):
+    DEBUG = True
 #     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yyvonne:ojijo@localhost/yvonneoumapitch'
 
 config_options = {
-# 'development':DevConfig,
+'development':DevConfig,
 'production':ProdConfig,
 # 'test':TestConfig
 }    
