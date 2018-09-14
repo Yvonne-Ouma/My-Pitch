@@ -1,3 +1,9 @@
+<style type="text/css">
+  ul>li {
+    text-decoration: none;
+    display: inline-block;
+  }
+</style>
 <div class="navbar navbar-inverse" role="navigation" style="overflow: hidden; background-color: black; position: fixed; z-index: 1; top: 0; width: 100%;">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -15,7 +21,7 @@
 
       </ul>
 
-      <ul class="nav navbar-nav navbar-right" style="text-decoration:none;display: inline-block;">
+      <ul class="nav navbar-nav navbar-right">
 
         {% if current_user.is_authenticated %}
         <li><a href="{{url_for('main.profile',uname=current_user.username)}}">View Profile</a></li>
