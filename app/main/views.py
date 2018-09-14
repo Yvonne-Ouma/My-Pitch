@@ -95,21 +95,19 @@ def one_pitch(id):
 
 @main.route('/pitch/<int:pitch_id>/',methods = ["GET","POST"])
 def pitch(pitch_id):
-    pitch = Pitch.query.get(pitch_id)
+    pitch = Pitch.query.filter_by(id=pitch_id)
     form = CommentForm()
 
     if form.validate_on_submit():
         title = form.title.data 
         comment = form.comment.data 
-        new_pitch_comment = Comment(title = title,
-                                    comment=comment,
-                                    pitch_id = pitch_id)
+        new_pitch_comment = Comment(title = title,comment=comment,pitch_id = pitch_id)
 
         db.session.add(new_pitch_comment) 
         db.session.commit()
 
-    comments = Comment.query.all()
-    return render_template('comment_pitch.html', title = pitch.title, pitch =pitch, pitch_form = form, comments = comments) 
+    comments = Comment.query.filter_by(pitch_id=pitch_id)
+    return render_template('comment_pitch.html', title = 'pitch', pitch =pitch, pitch_form = form, comments = comments) 
 
 
 
