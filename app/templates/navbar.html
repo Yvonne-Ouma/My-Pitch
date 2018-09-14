@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <div class="navbar navbar-inverse" role="navigation" style="overflow: hidden; background-color: black; position: fixed; z-index: 1; top: 0; width: 100%;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/"> My Pitch </a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    
-                </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                  
-                  {% if current_user.is_authenticated %}
-                  <li><a href="{{url_for('main.profile',uname=current_user.username)}}">View Profile</a></li>
-                  <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-                  {% else %}
-                  <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
-                  {%endif%}
-                </ul>
-            </div>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
 
-        </div>
+<body>
+  <div class="navbar navbar-inverse" role="navigation" style="overflow: hidden; background-color: black; position: fixed; z-index: 1; top: 0; width: 100%;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"> My Pitch </a>
     </div>
-  </body>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+
+        {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('main.profile',uname=current_user.username)}}">View Profile</a></li>
+        <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+        {% else %}
+        <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+        {%endif%}
+      </ul>
+    </div>
+
+  </div>
+  </div>
+</body>
+
 </html>
