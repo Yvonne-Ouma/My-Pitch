@@ -11,7 +11,7 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-    SUBJECT_PREFIX = 'My-Pitch'
+    SUBJECT_PREFIX = 'yvonneoumapitch'
     SENDER_EMAIL = 'yvonneouma98@gmail.com'
     
     @staticmethod
@@ -21,15 +21,15 @@ class Config:
 class ProdConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
-class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yyvonne:ojijo@localhost/my_pitch_test'
+# class TestConfig(Config):
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yyvonne:ojijo@localhost/my_pitch_test'
 
-class DevConfig(Config):
-    DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yyvonne:ojijo@localhost/my_pitch'
+# class DevConfig(Config):
+    # DEBUG = True
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://yyvonne:ojijo@localhost/my_pitch'
 
 config_options = {
-'development':DevConfig,
+# 'development':DevConfig,
 'production':ProdConfig,
-'test':TestConfig
+# 'test':TestConfig
 }    
